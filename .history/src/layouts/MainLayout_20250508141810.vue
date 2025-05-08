@@ -1,0 +1,45 @@
+<script setup>
+import { useLayoutStore } from "@/stores/layout";
+import { computed } from "vue";
+import MainHeader from "@/components/main/MainHeader.vue";
+import MainLeft from "@/components/main/MainLeft.vue";
+
+const layoutStore = useLayoutStore();
+const asideWidth = computed(() => (layoutStore.isCollapse ? "64px" : "200px"));
+</script>
+<template>
+  <div id="MainPage">
+    <el-container>
+      <el-aside :width="asideWidth">
+        <main-left />
+      </el-aside>
+      <el-container>
+        <el-header>
+          <main-header />
+        </el-header>
+        <el-main>
+          <router-view />
+        </el-main>
+      </el-container>
+    </el-container>
+  </div>
+</template>
+<style lang="scss" scoped>
+#MainPage {
+  height: 100%;
+}
+.el-container {
+  height: 100vh;
+}
+.el-aside {
+  background-color: black;
+  height: 100%;
+}
+.el-main {
+  height: 100%;
+}
+.el-header {
+  background-color: rgba(240, 254, 255);
+  height: 30px;
+}
+</style>
